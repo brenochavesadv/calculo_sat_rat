@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>📊 Recuperação de Créditos</h3>
+
+<article>
+  <header>📍 Selecione o Município</header>
+  <label>Buscar município por nome, UF, IBGE ou CNPJ:
+    <input type="hidden" id="municipio_cnpj">
+    <input type="hidden" id="municipio_nome">
+    <div style="margin-top:2px;">
+      <input type="text" id="municipio_search" placeholder="Filtrar municípios (nome, UF ou IBGE)"
+        style="width:100%; padding:3px;">
+    </div>
+    <div style="max-height:260px; overflow:auto; margin-top:4px; border:1px solid #ddd;">
+      <div id="municipioResults" style="display:flex; flex-direction:column; gap:0;">
+        <!-- results injected here: each item is a div.result-row -->
+      </div>
+    </div>
+  </label>
+  <label>Município Selecionado:
+    <input type="text" id="municipio_selected" readonly style="width:100%; padding:6px; margin-top:6px;"
+      aria-readonly="true">
+  </label>
+</article>
+
+<h2>SAT / GILRAT</h2>
+
+<article>
+  <header>📦 Importação de Arquivos</header>
+  <form id="uploadForm">
+    <label>Todos os arquivos devem estar descompactados e na mesma pasta!</label>
+    <label>O processamento pode levar alguns minutos dependendo da quantidade de arquivos.</label>
+    <label>Selecione a pasta com todos os arquivos XML:
+      <input type="file" id="lotes" name="lotes" webkitdirectory multiple accept=".xml">
+    </label>
+    <button type="submit">Enviar Arquivos</button>
+  </form>
+  <div style="display:flex; gap:12px; margin-top:8px; align-items:center;">
+    <div id="uploadCounters">
+      <div><strong>Enviados:</strong> <span id="uploadUploadedCounter">0</span> / <span id="uploadTotalCount">0</span>
+      </div>
+      <div><strong>Processados:</strong> <span id="uploadProcessedCounter">0</span> / <span
+          id="uploadTotalCount2">0</span></div>
+    </div>
+  </div>
+  <pre id="uploadOutput"></pre>
+</article>
+
+<article>
+  <header>🧮 Cálculo de Créditos SAT/RAT sobre Contribuições Pagas</header>
+  <div class="grid">
+    <label>Comp. Inicial
+      <input id="comp_ini" type="text" inputmode="numeric" value="01-2025"
+        placeholder="MM-AAAA" maxlength="7" pattern="^\d{2}-\d{4}$">
+    </label>
+    <label>Comp. Final
+      <input id="comp_fim" type="text" inputmode="numeric" value="12-2025"
+        placeholder="MM-AAAA" maxlength="7" pattern="^\d{2}-\d{4}$">
+    </label>
+    <label>Alíquota GILRAT Corrigida
+      <input id="aliquota_gilrat" type="text" inputmode="decimal" value="0,00" pattern="^\d+,\d{2}$"
+        title="Formato: 1234,56 (vírgula como separador e 2 casas decimais)">
+    </label>
+  </div>
+  <button id="btnGerarApuracao" onclick="gerarApuracao()">Gerar Apuração</button>
+  <button id="btnGerarPDFApuracao" onclick="gerarPDFApuracao()">Gerar Relatório PDF</button>
+  <p id="apuracaoStatus" style="margin-top:8px; font-size:0.95rem;"></p>
+  <pre id="apuracaoOutput"></pre>
+</article>
+
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/js/upload.js"></script>
+<script src="/static/js/apuracao.js?v=3"></script>
+<script src="/static/js/charts.js"></script>
+<script>
+  // Fetch municipios and populate the table, wire up filtering and selection
+  async function loadMunicipiosToTable() {
+    try {
+      const r = await fetch('/municipios/list', { credentials: 'include' });
+      if (!r.ok) throw new Error('Falha ao carregar municípios');
+      const j = await r.json();
+      const dados = j.municipios || [];
+      const results = document.getElementById('municipioResults');
+      results.innerHTML = '';
+      for (const m of dados) {
+        const row = document.createElement('div');
+        row.className = 'result-row';
+        row.style.padding = '6px';
+        row.style.borderBottom = '1px solid #f0f0f0';
+        row.style.cursor = 'pointer';
+        row.dataset.nome = (m.nome || '').toLowerCase();
+        row.dataset.uf = (m.uf || '').toLowerCase();
+        row.dataset.cod = String(m.cod_ibge || '');
+        row.dataset.cnpj = String(m.cnpj || '');
+        row.innerHTML = `<strong>${m.nome || ''} — ${m.uf || ''}</strong> — IBGE: ${m.cod_ibge || ''} — CNPJ: ${m.cnpj || ''}`;
+        row.addEventListener('click', () => {
+          // populate selection fields
+          document.getElementById('municipio_cnpj').value = m.cnpj || '';
+          document.getElementById('municipio_nome').value = m.nome || '';
+          // fill the visible selected summary input with useful info
+          const sel = document.getElementById('municipio_selected');
+          if (sel) {
+            sel.value = `${m.nome || ''} — ${m.uf || ''} — IBGE: ${m.cod_ibge || ''} — CNPJ: ${m.cnpj || ''}`;
+          }
+          // highlight briefly
+          row.style.background = '#e8f5e9';
+          setTimeout(() => row.style.background = '', 800);
+        });
+        results.appendChild(row);
+      }
+
+      // wire up filter
+      const input = document.getElementById('municipio_search');
+      input.addEventListener('input', () => {
+        const q = (input.value || '').trim().toLowerCase();
+        for (const row of results.children) {
+          const name = row.dataset.nome || '';
+          const uf = row.dataset.uf || '';
+          const cod = row.dataset.cod || '';
+          const cnpj = row.dataset.cnpj || '';
+          const match = !q || name.includes(q) || uf.includes(q) || cod.includes(q) || cnpj.includes(q);
+          row.style.display = match ? '' : 'none';
+        }
+      });
+
+      // also support typing into municipio_nome to filter table
+      const nameInput = document.getElementById('municipio_nome');
+      nameInput.addEventListener('input', () => {
+        const q = (nameInput.value || '').trim().toLowerCase();
+        // mirror into search box and trigger its input event
+        document.getElementById('municipio_search').value = nameInput.value;
+        document.getElementById('municipio_search').dispatchEvent(new Event('input'));
+      });
+
+    } catch (e) {
+      console.warn('Erro carregando municípios', e);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadMunicipiosToTable);
+  // Attach formatting/validation handlers for aliquota_gilrat input
+  document.addEventListener('DOMContentLoaded', () => {
+    const a = document.getElementById('aliquota_gilrat');
+    if (!a) return;
+    a.addEventListener('input', function () {
+      const raw = this.value.replace(/\./g, ',').replace(/[^\d,]/g, '');
+      const parts = raw.split(',');
+      this.value = parts.length > 1 ? parts[0] + ',' + parts.slice(1).join('').slice(0, 2) : parts[0];
+    });
+    a.addEventListener('blur', function () {
+      const raw = this.value.replace(/\./g, ',').replace(/[^\d,]/g, '');
+      const parts = raw.split(',');
+      const intPart = parts[0] || '0';
+      const decPart = (parts[1] || '').slice(0, 2).padEnd(2, '0');
+      this.value = intPart + ',' + decPart;
+    });
+  });
+</script>
+{% endblock %}

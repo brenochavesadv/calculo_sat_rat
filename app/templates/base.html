@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Recuperação GILRAT{% endblock %}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <style>
+    body { max-width: 1200px; margin: auto; }
+    code { white-space: pre-wrap; }
+    .hidden { display: none; }
+    #progressBar { width: 100%; background-color: #eee; border-radius: 6px; margin-top: 10px; }
+    #progressBar div { height: 12px; background-color: #2b8a3e; width: 0%; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <nav>
+      <ul>
+        <li><strong>💼 Recuperação GILRAT</strong></li>
+      </ul>
+      <ul>
+        <li><button onclick="refreshToken()" class="secondary">🔄 Renovar token</button></li>
+        <li><a href="#" onclick="logout()">🚪 Sair</a></li>
+      </ul>
+    </nav>
+    {% block content %}{% endblock %}
+  </main>
+    <script src="/static/js/auth.js"></script>
+    <script>
+      // expose upload limit to client-side scripts (bytes)
+    </script>
+    <script id="app-config" type="application/json">
+  {{ {'MAX_UPLOAD_BYTES': max_upload_bytes} | tojson | safe }}
+    </script>
+    <script>
+      window.APP_CONFIG = JSON.parse(document.getElementById('app-config').textContent);
+    </script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

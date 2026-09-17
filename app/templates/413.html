@@ -1,0 +1,11 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>413 Request Entity Too Large</title></head>
+<body>
+  <h1>Request Entity Too Large</h1>
+  <p>The uploaded data exceeded the server limit.</p>
+  {% if max_bytes %}
+  <p>Maximum allowed upload size: {{ (max_bytes/1024/1024)|round(2) }} MB</p>
+  {% endif %}
+</body>
+</html>

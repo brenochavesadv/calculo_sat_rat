@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create Admin</title>
+</head>
+
+<body>
+    <main>
+        <h1>Create Admin</h1>
+        <p>Creates a default admin user (username: admin, password: admin).</p>
+        <button id="createBtn">Create Admin</button>
+        <pre id="result" style="white-space:pre-wrap;margin-top:1rem"></pre>
+        <button id="goLogin" style="display:none;margin-top:1rem">Go to login</button>
+    </main>
+    <script>
+        const createBtn = document.getElementById('createBtn');
+        const resultPre = document.getElementById('result');
+        const goLogin = document.getElementById('goLogin');
+
+        createBtn.addEventListener('click', async () => {
+            try {
+                const res = await fetch('/auth/init_admin', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+                const data = await res.json();
+                resultPre.textContent = JSON.stringify(data, null, 2);
+                // If backend reports ok, show button to go to login
+                if (data && (data.ok === true || data.ok === 'true' || data.status === 'ok')) {
+                    goLogin.style.display = 'inline-block';
+                }
+            } catch (err) {
+                resultPre.textContent = String(err);
+            }
+        });
+
+        goLogin.addEventListener('click', () => { window.location.href = '/login'; });
+    </script>
+</body>
+
+</html>

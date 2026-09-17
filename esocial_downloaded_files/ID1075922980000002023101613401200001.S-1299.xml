@@ -1,0 +1,103 @@
+<eSocial xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.esocial.gov.br/schema/download/retornoProcessamento/v1_0_0"><retornoProcessamentoDownload><evento><eSocial xmlns="http://www.esocial.gov.br/schema/evt/evtFechaEvPer/v_S_01_01_00"><evtFechaEvPer Id="ID1075922980000002023101613401200001"><ideEvento><indApuracao>1</indApuracao><perApur>2023-09</perApur><tpAmb>1</tpAmb><procEmi>3</procEmi><verProc>1.0</verProc></ideEvento><ideEmpregador><tpInsc>1</tpInsc><nrInsc>07592298</nrInsc></ideEmpregador><infoFech><evtRemun>S</evtRemun><evtPgtos>S</evtPgtos><evtComProd>N</evtComProd><evtContratAvNP>N</evtContratAvNP><evtInfoComplPer>N</evtInfoComplPer></infoFech></evtFechaEvPer><Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="assindoc-signature"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" /><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" /><DigestValue>3q2LPlL13FN38X/ggAU6ymTktEmycYFJtfpN61yfggA=</DigestValue></Reference></SignedInfo><SignatureValue>sBItR/LeA422znDMAdu5Cncgf8HhicD03AS8LuRsnffOakl/2ys+DLA1qdCkQ4McfY1osPFHKsFi
+
+vYqT9nV/H9oA76Zzu2SZ1LyUG2tvi8N9jC+1HRClA9jmz2SaLMGp9PT9Psk7AbM6JT7Qr09XQzJa
+
+pMFkfWJm/CnGCYFePQCeNSP8r4AGDeYVWmhHCWQqMkBj3C8p+fDQp/bPgVj8/YEqGzOFf1a1vcRx
+
+uP0Ozoo4wUWT89ggINd0whiJMtLzf18ZupZ2Nv+MamX2jQYX0mQxxoPdoPE54XUUSZoBSkKqTEu0
+
+1e1/rz6+LRHzI2DeBxyS5S84BUl3q8mtdjOdZg==</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIIRjCCBi6gAwIBAgIQWfAcKdBL15ljwaSIyKhWSTANBgkqhkiG9w0BAQsFADCBgDELMAkGA1UE
+
+BhMCQlIxEzARBgNVBAoTCklDUC1CcmFzaWwxNjA0BgNVBAsTLVNlY3JldGFyaWEgZGEgUmVjZWl0
+
+YSBGZWRlcmFsIGRvIEJyYXNpbCAtIFJGQjEkMCIGA1UEAxMbQUMgSW5zdGl0dXRvIEZlbmFjb24g
+
+UkZCIEczMB4XDTIzMDYyMzEyMTMwN1oXDTI0MDYyMjEyMTMwN1owggELMQswCQYDVQQGEwJCUjET
+
+MBEGA1UECgwKSUNQLUJyYXNpbDEXMBUGA1UECwwOMzE4MjcwNzcwMDAxNjMxGTAXBgNVBAsMEFZJ
+
+REVPQ09ORkVSRU5DSUExNjA0BgNVBAsMLVNlY3JldGFyaWEgZGEgUmVjZWl0YSBGZWRlcmFsIGRv
+
+IEJyYXNpbCAtIFJGQjEVMBMGA1UECwwMUkZCIGUtQ1BGIEExMRIwEAYDVQQLDAlFTSBCUkFOQ08x
+
+ITAfBgNVBAsMGEFDIEluc3RpdHV0byBGZW5hY29uIFJGQjEtMCsGA1UEAwwkQU5BIENJQkVMRSBB
+
+TE1FSURBIENPU1RBOjAyNDQyNDM3MzUwMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
+
+0B2YhzMN+UWbO3ZjD9jb8+3ebDRWBxRh1JI2bDo+QKHbubdaT/BzZ5Eum2VgUtiaN+elFs97WyTY
+
+Egp5zQhElo0qqKWLBY/gsj+Aq9w2jcrVMFo3NhcChHakuGTJHv8sU5qMwWfOQ5wqFZZ39oflCjtD
+
+gf11b8b7h3Tli8LpSEpSXD3EMi9Igl6fN2CRY4bYjuNE+14JkPBm++/lV3WLsSuIVFBa5Ac6ckRx
+
+hJlXSMqvBfGWE2w/QsZv3XaWpWXOAfm+31k9T8gUqvq2j7/RTkdhe0Js8mukT9Af5DEAixTgAMsb
+
+U4wOUxqoKRbg8bpQrNnyp8NFE5cAEjcoc0by6QIDAQABo4IDLDCCAygwgbYGA1UdEQSBrjCBq6BC
+
+BgVgTAEDAaA5BDcwNTA3MTk4NzAyNDQyNDM3MzUwMDAwMDAwMDAwMDAwMDIwMDMwMTkwNTE4OTcw
+
+MDBTU1BEQ0NFoBcGBWBMAQMGoA4EDDAwMDAwMDAwMDAwMKA0BgVgTAEDBaArBCkwMDAwMDAwMDAw
+
+MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMIEWYW5hY2liZWxlYUBob3RtYWlsLmNvbTAJ
+
+BgNVHRMEAjAAMB8GA1UdIwQYMBaAFCbHlD16h35/S3iKhz3gz7XOqbDaMIGGBgNVHSAEfzB9MHsG
+
+BmBMAQIBIjBxMG8GCCsGAQUFBwIBFmNodHRwOi8vaWNwLWJyYXNpbC5hY2ZlbmFjb24uY29tLmJy
+
+L3JlcG9zaXRvcmlvL2RwYy9BQy1JbnN0aXR1dG8tRmVuYWNvbi1SRkIvRFBDX0FDX0lGZW5hY29u
+
+X1JGQi5wZGYwgcoGA1UdHwSBwjCBvzBeoFygWoZYaHR0cDovL2ljcC1icmFzaWwuYWNmZW5hY29u
+
+LmNvbS5ici9yZXBvc2l0b3Jpby9sY3IvQUNJbnN0aXR1dG9GZW5hY29uUkZCRzMvTGF0ZXN0Q1JM
+
+LmNybDBdoFugWYZXaHR0cDovL2ljcC1icmFzaWwub3V0cmFsY3IuY29tLmJyL3JlcG9zaXRvcmlv
+
+L2xjci9BQ0luc3RpdHV0b0ZlbmFjb25SRkJHMy9MYXRlc3RDUkwuY3JsMA4GA1UdDwEB/wQEAwIF
+
+4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgbsGCCsGAQUFBwEBBIGuMIGrMGYGCCsG
+
+AQUFBzAChlpodHRwOi8vaWNwLWJyYXNpbC5hY2ZlbmFjb24uY29tLmJyL3JlcG9zaXRvcmlvL2Nl
+
+cnRpZmljYWRvcy9BQ19JbnN0aXR1dG9fRmVuYWNvbl9SRkJHMy5wN2MwQQYIKwYBBQUHMAGGNWh0
+
+dHA6Ly9vY3NwLWFjLWluc3RpdHV0by1mZW5hY29uLXJmYi5jZXJ0aXNpZ24uY29tLmJyMA0GCSqG
+
+SIb3DQEBCwUAA4ICAQASvZkE1L4s/12eejoVC4kgXjnO8i3AzlRuDQW4NEbrMUtre9G9cos99bd8
+
+IJ8iObuPdvWBObvxqudtQoKk+pKzSp/n3tXGMZS/5SrTFheMtQlWKimEhaQe/JOs1iLo22KpzP0S
+
+SOHvy6Eh/RQZsaJ6b8WbNLL2Gj5nxFYiY+brlAQL9RJUyv42NCUzeIYIwEfOa6FX5ktoFfJaWS2p
+
+CCrXAQxspcbegewC0YNVz74HlfTwV7d2JFhHF2oQVr6kjUEXJ/28ilz9LDm+XcdtN5Jv06cmKfnB
+
++RYcAVgnknVsixlx4UQBrp/ETRS3Wuin5Vz3qxBpgNHjKNltPmQP7iW8nTE3mr4yAnvU6djG6Zis
+
+kGFLkZVkjp0Ar/PSqGSi/Xo7GgWX9eAGXSMNQpX2PqzQLLXmfE+NU56bWkv7cFHWKn3IaDRDgIFo
+
+S/mBAGyq700OUwSN9kM2mA6dcQieJwlXuA1KIfODR1qrzk8M8VfymYWKJMnpmTRVbdX9A6+gnIzf
+
+UbDHzhIwVNL5PnMCxNMairXRR5M895w/IRSoCGY1d1ILRJacK7BXdtlknChsQRntKmkr9FlCsIb+
+
+dMI4/vHuMgKdHH/t5hl7Adcvn2EuG8wARR1keTUQhzKFSo+11dS3evjF4RAmSH2EHxTfForCKRn0
+
+N7Mo6h4CHfRg3WQkFA==</X509Certificate></X509Data></KeyInfo></Signature></eSocial></evento><recibo><eSocial xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.esocial.gov.br/schema/evt/retornoEvento/v1_2_1"><retornoEvento Id="ID1075922980000002023101613401200001"><ideEmpregador><tpInsc>1</tpInsc><nrInsc>07592298</nrInsc></ideEmpregador><recepcao><tpAmb>1</tpAmb><dhRecepcao>2023-10-16T13:40:38.383</dhRecepcao><versaoAppRecepcao>eSocial-Web</versaoAppRecepcao><protocoloEnvioLote>1.1.202310.0000000006586831794</protocoloEnvioLote></recepcao><processamento><cdResposta>202</cdResposta><descResposta>Sucesso com advertncia.</descResposta><versaoAppProcessamento>15.1.5.0</versaoAppProcessamento><dhProcessamento>2023-10-16T13:40:44.88</dhProcessamento><ocorrencias><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 44194870387 e Matrcula : 031846-9 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 69298513372 e Matrcula : 750174-9 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 96441348349 e Matrcula : 021424-8 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 96277785320 e Matrcula : 021533-3 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 53251490320 e Matrcula : 072715-6 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 65276680310 e Matrcula : 072712-1 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 00662758307 e Matrcula : 082945-5 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 01378480309 e Matrcula : 082880-7 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 00572711352 e Matrcula : 082976-5 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 82837430315 e Matrcula : 753462-2 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 02654587304 e Matrcula : 753464-1 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 89285166334 e Matrcula : 753469-9 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 04424136370 e Matrcula : 753469-3 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 01478424338 e Matrcula : 753471-8 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 02380280380 e Matrcula : 753500-6 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 04392673316 e Matrcula : 753503-1 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 04365176390 e Matrcula : 130859-9 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>162</codigo><descricao>O Trabalhador com CPF : 06934710347 e Matrcula : 131140-9 consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao. 
+Ao Sugerida: Verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>761</codigo><descricao>No foi localizada a remunerao do trabalhador CPF: 31683657349 Matrcula 131629-0 no perodo de apurao 2023-09.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>1692</codigo><descricao>O Benefcio 4424/94 do Beneficirio LUIZA MOREIRA SANDERS consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao.
+Ao sugerida: verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia><ocorrencia><tipo>2</tipo><codigo>1692</codigo><descricao>O Benefcio 10246/94 do Beneficirio MARCIANA ROCHA DE SOUSA consta na base de dados do Ambiente Nacional do eSocial, mas no foi informada sua remunerao.
+Ao sugerida: verificar se a falta de informao  decorrente de dificuldades operacionais ou se  possvel efetuar a regularizao.</descricao><localizacao /></ocorrencia></ocorrencias></processamento><recibo><nrRecibo>1.1.0000000022205101218</nrRecibo><hash>3q2LPlL13FN38X/ggAU6ymTktEmycYFJtfpN61yfggA=</hash></recibo></retornoEvento><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" /><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" /><DigestValue>g5YiRgUuFO662BLq9bMWjZnOwGIqnHEaAqZFyg9Ba7s=</DigestValue></Reference></SignedInfo><SignatureValue>Q/uYPlXBDNB5hHm0lpz+TTJ78W2ObgUPPhMCskc0wvXp5j+MESoWJ9YuW3RkmM05tbBln0QlgcdV+yw+kunYgZBGtr+iFsu96xxc3VSZ2kbaOCKyrG8cimiL12imDDMOSJJcj4MRXRuJ1AxKEriJLHoewoLxe/GYM1FTaAqKzFe+A7XArEBbJ71Mi3VH1EcuDaiNMGSaqKakNClWky+wlB4b+PKi17D93AJtZMbKo2F+AYtcQOIOroYuG/NkjUA3Rrqa+0YcaiI9tgMNNo0TFApjuHD5DGEqAkuhYr6iS7rPK7CDyFamAfeHLCcdklzUVtuvpexpXlscdC/jTVa/aA==</SignatureValue><KeyInfo><X509Data><X509Certificate>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</X509Certificate></X509Data></KeyInfo></Signature></eSocial></recibo></retornoProcessamentoDownload></eSocial>
