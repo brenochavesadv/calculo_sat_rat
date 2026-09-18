@@ -8,9 +8,9 @@ from app.models.calcula_cs import CalculaCs
 from app.models.base_apurada import BaseApurada
 from app.models.contribuicao import Contribuicao
 from app.models.ajuste import Ajuste
-from app.models.selic import SelicMensal
+from app.models.selic_mensal_4390 import SelicMensal4390
 from app.models.municipio import Municipio
-from datetime import datetime
+from datetime import date, datetime
 
 
 def _normalize_comp(c):
@@ -32,41 +32,30 @@ def _normalize_comp(c):
         raise ValueError('Mês da competência inválido')
     return f"{yyyy:04d}-{mm:02d}"
 
-
 def apurar_rat(comp_ini, comp_fim, cnpj, aliquota):
     comp_ini_norm = _normalize_comp(comp_ini)
     comp_fim_norm = _normalize_comp(comp_fim)
 
-    # chamar a SelicService para atualizar a tabela SelicMensal
-    from app.services.selic_services import fetch_and_upsert_selic_from_bacen
-    try:
-        fetch_and_upsert_selic_from_bacen()
-    except Exception:
-        # Do not fail the whole apuracao if SELIC refresh has transient errors.
-        pass
-
+    """     # chamar a SelicService para atualizar a tabela SelicMensal
+        from app.services.selic_4390_service import fetch_and_upsert_selic_from_bacen
+        try:
+            fetch_and_upsert_selic_from_bacen()
+        except Exception:
+            # Do not fail the whole apuracao if SELIC refresh has transient errors.
+            pass
+    """
     # keep API contract and return the computed result
     return calcula_cs(comp_ini=comp_ini_norm, comp_fim=comp_fim_norm, cnpj=cnpj, aliq_rat_corrigida=aliquota)
 
-def _parse_comp(c): y, m = c.split('-'); return datetime(int(y), int(m), 1)
+def _parse_comp(c): 
+    y, m = c.split('-')
+    return datetime(int(y), int(m), 1)
 
-def _fmt_comp(d): return f"{d.year:04d}-{d.month:02d}"
+def _fmt_comp(d: date): return f"{d.year:04d}-{d.month:02d}"
 
 def _end_of_month(d):
     from calendar import monthrange
     return datetime(d.year, d.month, monthrange(d.year, d.month)[1])
-
-def _selic_factor(comp_ini, comp_fim):
-    ini = _parse_comp(comp_ini); fim = _parse_comp(comp_fim)
-    cur = datetime(ini.year + (ini.month==12), (ini.month % 12) + 1, 1)
-    fator = 1.0
-    while cur <= fim:
-        # use Session.get to avoid SQLAlchemy legacy Query.get warning
-        s = db.session.get(SelicMensal, _fmt_comp(cur))
-        if s:
-            fator *= (1.0 + (s.taxa or 0.0)/100.0)
-        cur = datetime(cur.year + (cur.month==12), (cur.month % 12) + 1, 1)
-    return fator
 
 def _vigente(est, comp):
     ref_ini = datetime.strptime(comp + "-01", "%Y-%m-%d").date()
@@ -78,13 +67,18 @@ def _vigente(est, comp):
 def calcula_cs(comp_ini, comp_fim, cnpj=None, aliq_rat_corrigida=0, fap_corrigido=0):
     """ calcula o RAT e GIL-RAT para o período informado, com os dados do CNPJ e alíquota fornecidos, retornando um dicionário com os resultados """
 
-    ini = _parse_comp(comp_ini); fim = _parse_comp(comp_fim)
-    comps = []; cur = ini
-
     if aliq_rat_corrigida < 1:
         raise ValueError("A alíquota RAT corrigida deve ser fornecida e não pode ser menor que 1.")
 
-    while cur <= fim:
+    if fap_corrigido < 0:
+        raise ValueError("O FAP corrigido deve ser fornecido e não pode ser negativo.")
+
+    mes_fim = _parse_comp(comp_fim)
+    mes_ini = _parse_comp(comp_ini)
+    comps = []
+    cur = mes_ini
+    
+    while cur <= mes_fim:
         comps.append(_fmt_comp(cur))
         cur = datetime(cur.year + (cur.month==12), (cur.month % 12) + 1, 1)
 

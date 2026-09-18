@@ -36,7 +36,7 @@ def _import_models():
     from app.models import municipio  # noqa: F401
     from app.models import remuneracao  # noqa: F401
     from app.models import rubrica  # noqa: F401
-    from app.models import selic  # noqa: F401
+    from app.models import selic_mensal_4390  # noqa: F401
     from app.models import user  # noqa: F401
 
 

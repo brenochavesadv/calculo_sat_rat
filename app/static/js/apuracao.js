@@ -118,7 +118,13 @@ async function gerarPDFApuracao() {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token()
     },
-    body: JSON.stringify({ resultado: ultimaApuracao, cnpj: cnpj, municipio: municipio })
+    body: JSON.stringify({
+      resultado: ultimaApuracao,
+      cnpj: cnpj,
+      municipio: municipio,
+      comp_ini: document.getElementById('comp_ini')?.value.trim() || '',
+      comp_fim: document.getElementById('comp_fim')?.value.trim() || ''
+    })
   });
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
