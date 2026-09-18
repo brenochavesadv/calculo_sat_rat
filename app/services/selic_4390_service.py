@@ -151,43 +151,48 @@ class Selic4390Service:
             logger.exception("Error retrieving SELIC 4390 data from database: %s", e)
             raise    
 
-    def calcula_selic_acumulada(self, values: List[SelicMensal4390], mes_final: str) -> Dict[str, Decimal]:
-        """Calcula a SELIC de cada competência até mes_final, em percentual."""
+    @staticmethod
+    def calcular_selic_acumulada_RFB(values: List[SelicMensal4390], mes_final: str) -> Dict[str, Decimal]:
+        """Calcula o fator SELIC composto de cada competência até ``mes_final``.
+
+        Pela regra da RFB, a taxa do mês da competência inicial não entra no
+        cálculo. O resultado é o fator final, já começando em ``1``; portanto,
+        uma competência sem meses posteriores retorna ``Decimal("1")``.
+        """
         if not values:
             raise ValueError("A lista de valores SELIC não pode estar vazia.")
 
-        # Order a copy so calculating the factor does not mutate the caller's list.
-        final = self._normalize_competencia(mes_final)
-        ordered_values = sorted(
-            values, key=lambda x: self._normalize_competencia(x.competencia)
-        )
+        acumulado_mes = {}
+        sorted_values = sorted(values, key=lambda x: Selic4390Service._normalize_competencia(x.competencia))
+        reversed_values = list(reversed(sorted_values))
+        final = Selic4390Service._normalize_competencia(mes_final)
 
-        selic_acumulada = {}
+        for entry in reversed_values:
 
-        fator_acumulado = Decimal("1")
+            competencia = Selic4390Service._normalize_competencia(entry.competencia)
 
-        for entry in reversed(ordered_values):
-            competencia = self._normalize_competencia(entry.competencia)
             if competencia > final:
                 continue
 
-            try:
-                taxa = Decimal(str(entry.taxa).replace(",", "."))
-            except (TypeError, ValueError, ArithmeticError) as exc:
-                raise ValueError(
-                    f"Taxa SELIC inválida para competência {entry.competencia}: {entry.taxa}"
-                ) from exc
-
-            if not taxa.is_finite() or taxa <= 0:
-                raise ValueError(
-                    f"Taxa SELIC inválida para competência {entry.competencia}: {entry.taxa}"
-                )
-
-            fator_acumulado *= Decimal("1") + (taxa / Decimal("100"))
-            # Reverse traversal compounds this month through mes_final.
-            selic_acumulada[competencia] = (fator_acumulado - Decimal("1")) * Decimal("100")
+            acumulado = 0.00
             
-        return selic_acumulada
+            for item in reversed_values:
+
+                comp = Selic4390Service._normalize_competencia(item.competencia)
+
+                # Se a competência do item for maior ou igual à competência final, não deve ser incluída no cálculo.
+                if comp >= final:
+                    continue               
+                elif comp > competencia:
+                   acumulado += item.taxa
+                elif comp == competencia:
+                    acumulado += 1.00
+                else:
+                    break
+                    
+            acumulado_mes[competencia] = acumulado
+        
+        return acumulado_mes
 
     @staticmethod
     def _normalize_competencia(value: str) -> str:

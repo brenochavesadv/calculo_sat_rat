@@ -47,7 +47,7 @@ def relatorio_rat_resumo_pdf(
     selic_values = selic_service.get_selic_4390(
         mes_inicial=mes_inicial, mes_final=mes_final
     )
-    selic_acumulada = selic_service.calcula_selic_acumulada(
+    selic_acumulada = selic_service.calcular_selic_acumulada_RFB(
         values=selic_values, mes_final=mes_final
     )
 
@@ -74,36 +74,22 @@ def relatorio_rat_resumo_pdf(
         elementos.append(Paragraph(f"CNPJ: {cnpj} - {municipio}", estilos["Normal"]))
         elementos.append(Spacer(1, 3 * mm))
 
-    total_periodo = resultado.get("total_rat_periodo", 0.0)
-    total_periodo_corrigido = resultado.get("total_rat_periodo_corrigido", 0.0)
-    dif_periodo = total_periodo - total_periodo_corrigido 
-
-    resumo = [
-        f"Total Apurado: {_number(total_periodo, money=True)}",
-        f"Total Corrigido: {_number(total_periodo_corrigido, money=True)}",
-        f"Diferença: {_number(dif_periodo, money=True)}",
-        ]
-
     table_style = TableStyle(
                 [
                     ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#234b59")),
                     ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
                     ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-                    ("FONTSIZE", (0, 0), (-1, 0), 8),
-                    ("FONTSIZE", (0, 1), (-1, -1), 7),
-                    ("LEADING", (0, 0), (-1, -1), 9),
+                    ("ALIGN", (0, 0), (-1, 0), "CENTER"),
+                    ("ALIGN", (0, 1), (-1, -1), "RIGHT"),
+                    ("FONTSIZE", (0, 0), (-1, 0), 10),
+                    ("FONTSIZE", (0, 1), (-1, -1), 8),
+                    ("LEADING", (0, 0), (-1, 0), 12),
+                    ("LEADING", (0, 1), (-1, -1), 9),
                     ("GRID", (0, 0), (-1, -1), 0.35, colors.HexColor("#9aaeb5")),
                     ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#f1f5f6")]),
                     ("PADDING", (0, 0), (-1, -1), 5),
                 ]
             )
-    
-    style = table_style
-    style.add("ALIGN", (1, 1), (-1, -1), "CENTER")
-    resumo_tabela = Table([resumo], colWidths=[60 * mm, 60 * mm, 60 * mm])
-    resumo_tabela.setStyle(style)
-    
-    elementos.extend([resumo_tabela, Spacer(1, 6 * mm)])
 
     dados = [[
         "Competência",
@@ -134,8 +120,8 @@ def relatorio_rat_resumo_pdf(
         aliq_rat_corrigida_ajustada = float(linha.get("aliq_rat_corrigida_ajustada") or 0) / 100
         vl_corrigido = base_apurada * aliq_rat_corrigida_ajustada
         credito = vl_apurado - vl_corrigido
-        selic = selic_acumulada.get(competencia, Decimal("0"))
-        cred_atz = credito * (1 + float(selic) / 100)
+        selic = selic_acumulada.get(competencia, 0.00)
+        cred_atz = credito * float(selic)/100 + credito
         cred_acum = cred_acum + cred_atz
         
         dados.append([
@@ -148,15 +134,27 @@ def relatorio_rat_resumo_pdf(
             _number(fap_devido, decimals=4),
             _number(vl_corrigido, money=True),
             _number(credito, money=True),
-            _number(selic, decimals=2),
+            _percent(selic, decimals=2),
             _number(cred_atz, money=True),
             _number(cred_acum, money=True),
         ])
 
-    style = table_style
-    style.add("ALIGN", (1, 1), (-1, -1), "RIGHT")
+    total_apurado = resultado.get("total_rat_periodo", 0.0)
+    credito_apurado = total_apurado - resultado.get("total_rat_periodo_corrigido", 0.0)
+
+    resumo = [
+        f"Total Apurado: {_number(total_apurado, money=True)}",
+        f"Indébito Apurado: {_number(credito_apurado, money=True)}",
+        f"Indébito Atz.: {_number(cred_acum, money=True)}",
+        ]
+
+    resumo_tabela = Table([resumo], colWidths=[60 * mm, 60 * mm, 60 * mm])
+    resumo_tabela.setStyle(table_style)
+        
+    elementos.extend([resumo_tabela, Spacer(1, 6 * mm)])
+
     tabela = Table(dados, repeatRows=1)
-    tabela.setStyle(style)
+    tabela.setStyle(table_style)
 
     elementos.append(tabela)
     documento.build(elementos)

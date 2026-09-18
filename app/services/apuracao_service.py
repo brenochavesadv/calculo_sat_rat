@@ -117,8 +117,6 @@ def calcula_cs(comp_ini, comp_fim, cnpj=None, aliq_rat_corrigida=0, fap_corrigid
                 .first()
             )
 
-            print(f"Selected evt_cs for comp {comp} and estab {estab.nrInsc}: {selected_evt_cs}")
-
             if selected_evt_cs is None:
                 continue
 
